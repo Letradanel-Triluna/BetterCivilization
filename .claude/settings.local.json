@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\\\Users\\\\Letra\\\\OneDrive\\\\Документы\\\\GitHub\\\\BetterCivilization\" /s /b)",
+      "Bash(findstr /i \"polic\")"
+    ]
+  }
+}
