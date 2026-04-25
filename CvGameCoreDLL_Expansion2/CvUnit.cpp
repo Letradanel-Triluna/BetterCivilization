@@ -347,7 +347,7 @@ CvUnit::CvUnit() :
 {
 	initPromotions();
 	OBJECT_ALLOCATED
-	FSerialization::unitsToCheck.insert(this);
+	// NOTE: unitsToCheck.insert removed — same mixed-CRT v141 crash avoidance as plotsToCheck/citiesToCheck.
 	reset(0, NO_UNIT, NO_PLAYER, true);
 }
 
@@ -356,7 +356,6 @@ CvUnit::CvUnit() :
 CvUnit::~CvUnit()
 {
 	m_thisHandle.ignoreDestruction(true);
-	FSerialization::unitsToCheck.erase(this);
 	if(!gDLL->GetDone() && GC.IsGraphicsInitialized())  // don't need to remove entity when the app is shutting down, or crash can occur
 	{
 		auto_ptr<ICvUnit1> pDllUnit(new CvDllUnit(this));

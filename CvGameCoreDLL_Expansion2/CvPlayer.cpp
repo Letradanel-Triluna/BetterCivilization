@@ -14817,11 +14817,8 @@ int CvPlayer::GetHappinessFromResources() const
 
 			iTotalHappiness += iBaseHappiness;
 			iTotalHappiness += GetExtraHappinessPerLuxury();
-			// INDONESIA UA REWORK: +1 happiness per luxury resource owned
-			if(strcmp(getCivilizationTypeKey(), "CIVILIZATION_INDONESIA") == 0)
-			{
-				iTotalHappiness += 1;
-			}
+			// Indonesia +1 per luxury is handled by ExtraHappinessPerLuxury=1 in TRAIT_SPICE XML.
+			// Removed duplicate hardcoded +1 that caused +6 instead of +5.
 		}
 	}
 

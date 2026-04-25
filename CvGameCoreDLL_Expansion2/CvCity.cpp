@@ -339,8 +339,7 @@ CvCity::CvCity() :
 #endif
 {
 	OBJECT_ALLOCATED
-	FSerialization::citiesToCheck.insert(this);
-
+	// NOTE: citiesToCheck.insert removed — same mixed-CRT v141 crash avoidance as plotsToCheck/unitsToCheck.
 	reset(0, NO_PLAYER, 0, 0, true);
 }
 
@@ -348,8 +347,6 @@ CvCity::CvCity() :
 CvCity::~CvCity()
 {
 	CvCityManager::OnCityDestroyed(this);
-	FSerialization::citiesToCheck.erase(this);
-
 	uninit();
 
 	delete m_pCityBuildings;

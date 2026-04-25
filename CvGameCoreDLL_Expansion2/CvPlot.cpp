@@ -147,7 +147,8 @@ CvPlot::CvPlot() :
 	m_syncArchive(*this)
 	, m_eFeatureType("CvPlot::m_eFeatureType", m_syncArchive, true)
 {
-	FSerialization::plotsToCheck.insert(this);
+	// NOTE: plotsToCheck.insert removed — v141 std::set heap-init incompatible with mixed CRT (LIBCMT+msvcr90/FORCE:MULTIPLE).
+	// Network sync (SyncPlots/ClearPlotDeltas) iterates an empty set → no-op, safe for single-player.
 	m_paiBuildProgress = NULL;
 
 	m_szScriptData = NULL;
@@ -162,7 +163,6 @@ CvPlot::CvPlot() :
 //	--------------------------------------------------------------------------------
 CvPlot::~CvPlot()
 {
-	FSerialization::plotsToCheck.erase(this);
 	uninit();
 }
 
