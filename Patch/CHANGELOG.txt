@@ -1,0 +1,77 @@
+================================================================
+  BetterCivilization Balance Patch — Changelog
+  Tournament Mod V12.2a
+================================================================
+
+--- BALANCE CHANGES ---
+
+[HUNS]
+• +1 Food, +1 Production, +1 Gold on Horse resource tiles.
+  Bonus activates when the Horse tile is worked by a city —
+  which happens naturally after researching Animal Husbandry
+  (the tech that reveals horses on the map).
+
+[VENICE]
+• Maximum number of Trade Routes doubled (+100% to Trade Route cap).
+• Venice Trade Routes cannot be pillaged by enemy units.
+
+[PORTUGAL — Torre de Belem]
+• Happiness bonus increased from +1 to +2.
+• Provides enhanced City Defense in the city where it is built
+  (local bonus, not global).
+
+[ALL ARCHER-CLASS UNITS]
+  Applies to: Archer, Composite Bowman, Crossbowman,
+  Chu-Ko-Nu, Longbowman, Bowman, Atlatlist, Machine Gun,
+  Gatling Gun, Bazooka, and Barbarian equivalents.
+
+• −33% Combat Strength when attacking Cities.
+• −33% Combat Strength when attacking Siege units.
+
+--- BUG FIXES ---
+
+• Fixed Portugal's civilization description incorrectly
+  displaying Venice's "Trade Routes cannot be pillaged" text.
+  Mare Clausum now shows the correct description.
+
+================================================================
+
+
+================================================================
+  BetterCivilization — Список изменений
+  Tournament Mod V12.2a
+================================================================
+
+--- БАЛАНС ---
+
+[ГУННЫ]
+• +1 Еда, +1 Молоток, +1 Золото на клетках с ресурсом Лошадь.
+  Бонус активируется когда город обрабатывает клетку с лошадью —
+  что происходит естественным образом после изучения
+  Животноводства (техи, раскрывающей лошадей на карте).
+
+[ВЕНЕЦИЯ]
+• Максимальное количество торговых путей удвоено (+100% к лимиту).
+• Торговые пути Венеции не могут быть разграблены врагом.
+
+[ПОРТУГАЛИЯ — Торре-де-Белем]
+• Бонус к Счастью увеличен с +1 до +2.
+• Дает усиленную защиту только в том городе,
+  где построено здание (местный бонус, не глобальный).
+
+[ВСЕ ЮНИТЫ ТИПА "ЛУЧНИК"]
+  Применяется к: Лучник, Составной лук, Арбалетчик,
+  Чу-Ко-Ну, Лонгбоумен, Bowman, Атлатлист, Пулемёт,
+  Митральеза, Базука и их варварские аналоги.
+
+• −33% боевой силы при атаке Городов.
+• −33% боевой силы при атаке Осадных орудий.
+
+--- ИСПРАВЛЕНИЯ ---
+
+• Исправлено описание цивилизации Португалии —
+  ошибочно отображался текст Венеции
+  ("Торговые пути нельзя разграбить").
+  Теперь Mare Clausum показывает правильное описание.
+
+================================================================

@@ -1,5 +1,5 @@
 /*	-------------------------------------------------------------------------------------------------------
-	© 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
+	ï¿½ 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
 	Sid Meier's Civilization V, Civ, Civilization, 2K Games, Firaxis Games, Take-Two Interactive Software 
 	and their respective logos are all trademarks of Take-Two interactive Software, Inc.  
 	All other marks and trademarks are the property of their respective owners.  
@@ -8314,6 +8314,13 @@ int CvPlot::calculateYield(YieldTypes eYield, bool bDisplay)
 						iYield += 1;
 					}
 #endif
+					// HUNS UA REWORK: +1 Production, Food, Gold on Horse resource tiles
+					if(strcmp(pkResourceInfo->GetType(), "RESOURCE_HORSE") == 0
+						&& ePlayer != NO_PLAYER && strcmp(GET_PLAYER(ePlayer).getCivilizationTypeKey(), "CIVILIZATION_HUNS") == 0)
+					{
+						if(eYield == YIELD_PRODUCTION || eYield == YIELD_FOOD || eYield == YIELD_GOLD)
+							iYield += 1;
+					}
 				}
 			}
 		}
@@ -11235,6 +11242,13 @@ int CvPlot::getYieldWithBuild(BuildTypes eBuild, YieldTypes eYield, bool bWithUp
 						iYield += 1;
 					}
 #endif
+					// HUNS UA REWORK: +1 Production, Food, Gold on Horse resource tiles
+					if(strcmp(pkResourceInfo->GetType(), "RESOURCE_HORSE") == 0
+						&& ePlayer != NO_PLAYER && strcmp(GET_PLAYER(ePlayer).getCivilizationTypeKey(), "CIVILIZATION_HUNS") == 0)
+					{
+						if(eYield == YIELD_PRODUCTION || eYield == YIELD_FOOD || eYield == YIELD_GOLD)
+							iYield += 1;
+					}
 				}
 			}
 		}

@@ -1,5 +1,5 @@
 /*	-------------------------------------------------------------------------------------------------------
-	© 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
+	ï¿½ 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
 	Sid Meier's Civilization V, Civ, Civilization, 2K Games, Firaxis Games, Take-Two Interactive Software 
 	and their respective logos are all trademarks of Take-Two interactive Software, Inc.  
 	All other marks and trademarks are the property of their respective owners.  
@@ -7158,6 +7158,12 @@ void CvCity::processBuilding(BuildingTypes eBuilding, int iChange, bool bFirst, 
 #endif
 				ChangeBaseYieldRateFromBuildings(eYield, ((pBuildingInfo->GetYieldChange(eYield) + m_pCityBuildings->GetBuildingYieldChange(eBuildingClass, eYield)) * iChange));
 				changeYieldRateModifier(eYield, (pBuildingInfo->GetYieldModifier(eYield) * iChange));
+				// BABYLON UA REWORK: science buildings give +1 Food
+				if(eYield == YIELD_FOOD && pBuildingInfo->IsScienceBuilding() &&
+					strcmp(GET_PLAYER(getOwner()).getCivilizationTypeKey(), "CIVILIZATION_BABYLON") == 0)
+				{
+					ChangeBaseYieldRateFromBuildings(eYield, iChange);
+				}
 			}
 #else
 #ifdef BUILDING_RIVER_GOLD

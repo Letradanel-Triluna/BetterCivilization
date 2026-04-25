@@ -1,5 +1,5 @@
 /*	-------------------------------------------------------------------------------------------------------
-	© 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
+	ï¿½ 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
 	Sid Meier's Civilization V, Civ, Civilization, 2K Games, Firaxis Games, Take-Two Interactive Software 
 	and their respective logos are all trademarks of Take-Two interactive Software, Inc.  
 	All other marks and trademarks are the property of their respective owners.  
@@ -7095,7 +7095,7 @@ int CvLuaPlayer::lGetCurrentEra(lua_State* L)
 //int getTeam();
 int CvLuaPlayer::lGetTeam(lua_State* L)
 {
-	return BasicLuaMethod(L, &CvPlayerAI::getTeam);
+	return BasicLuaMethod(L, static_cast<TeamTypes (CvPlayerAI::*)() const>(&CvPlayerAI::getTeam));
 }
 //------------------------------------------------------------------------------
 //ColorTypes GetPlayerColor();

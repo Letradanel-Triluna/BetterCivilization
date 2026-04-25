@@ -1,5 +1,5 @@
 /*	-------------------------------------------------------------------------------------------------------
-	© 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
+	ï¿½ 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
 	Sid Meier's Civilization V, Civ, Civilization, 2K Games, Firaxis Games, Take-Two Interactive Software 
 	and their respective logos are all trademarks of Take-Two interactive Software, Inc.  
 	All other marks and trademarks are the property of their respective owners.  
@@ -8,6 +8,7 @@
 #include "CvGameCoreDLLPCH.h"
 #include "CvGameCoreUtils.h"
 #include "CvPreGame.h"
+
 #include "FIGameIniParser.h"
 #include "FLua/Include/FLua.h"
 #include "FStlContainerSerialization.h"
@@ -187,9 +188,7 @@ struct Phony
 };
 Phony phony;
 
-
 FAutoArchiveClassContainer<Phony>                       s_preGameArchive(phony);
-
 PREGAMEVAR(PlayerTypes,                        s_activePlayer,           NO_PLAYER);
 PREGAMEVARDEFAULT(CvString,                           s_adminPassword);
 PREGAMEVAR(int,                                s_advancedStartPoints,    0);
@@ -326,6 +325,7 @@ std::vector<CvString> s_draftPlayerSecretHashes(MAX_MAJOR_CIVS);
 std::vector<CvString> s_draftBansMsgQueue(MAX_PLAYERS);
 std::vector<bool> s_draftAllBansReceived(MAX_MAJOR_CIVS);
 int s_draftCurrBansMsgNumber = 0;
+
 CvString hash(CvString m) {
 	uint H[8] = { 0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19 };
 	uint K[64] = {

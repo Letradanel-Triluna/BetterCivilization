@@ -1,5 +1,5 @@
 /*	-------------------------------------------------------------------------------------------------------
-	© 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
+	ï¿½ 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
 	Sid Meier's Civilization V, Civ, Civilization, 2K Games, Firaxis Games, Take-Two Interactive Software 
 	and their respective logos are all trademarks of Take-Two interactive Software, Inc.  
 	All other marks and trademarks are the property of their respective owners.  
@@ -930,6 +930,22 @@ int CvTraitEntry::GetGoldForLuxuryExport() const
 }
 #endif
 
+#ifdef TRAIT_EXTRA_HAPPINESS_PER_LUXURY
+///
+int CvTraitEntry::GetExtraHappinessPerLuxury() const
+{
+	return m_iExtraHappinessPerLuxury;
+}
+#endif
+
+#ifdef TRAIT_NO_CARGO_PILLAGE
+///
+bool CvTraitEntry::IsNoCargoPillage() const
+{
+	return m_bNoCargoPillage;
+}
+#endif
+
 #ifdef TRAIT_INTERNATIONAL_TRADE_ROUTE_YIELD_CHANGES
 ///
 int CvTraitEntry::GetInternationalTradeRoteYieldChangesTimes100(int i) const
@@ -1126,6 +1142,12 @@ bool CvTraitEntry::CacheResults(Database::Results& kResults, CvDatabaseUtility& 
 #endif
 #ifdef TRAIT_GOLD_FOR_LUXURY_EXPORT
 	m_iGoldForLuxuryExport = kResults.GetInt("GoldForLuxuryExport");
+#endif
+#ifdef TRAIT_EXTRA_HAPPINESS_PER_LUXURY
+	m_iExtraHappinessPerLuxury = kResults.GetInt("ExtraHappinessPerLuxury");
+#endif
+#ifdef TRAIT_NO_CARGO_PILLAGE
+	m_bNoCargoPillage = kResults.GetBool("NoCargoPillage");
 #endif
 
 	//Arrays
@@ -1836,6 +1858,15 @@ void CvPlayerTraits::InitPlayerTraits()
 #ifdef TRAIT_GOLD_FOR_LUXURY_EXPORT
 			m_iGoldForLuxuryExport += trait->GetGoldForLuxuryExport();
 #endif
+#ifdef TRAIT_EXTRA_HAPPINESS_PER_LUXURY
+			m_iExtraHappinessPerLuxury += trait->GetExtraHappinessPerLuxury();
+#endif
+#ifdef TRAIT_NO_CARGO_PILLAGE
+			if (trait->IsNoCargoPillage())
+			{
+				m_bNoCargoPillage = true;
+			}
+#endif
 #ifdef TRAIT_INTERNATIONAL_TRADE_ROUTE_YIELD_CHANGES
 			for (int iYield = 0; iYield < NUM_YIELD_TYPES; iYield++)
 			{
@@ -2059,6 +2090,12 @@ void CvPlayerTraits::Reset()
 #endif
 #ifdef TRAIT_GOLD_FOR_LUXURY_EXPORT
 	m_iGoldForLuxuryExport = 0;
+#endif
+#ifdef TRAIT_EXTRA_HAPPINESS_PER_LUXURY
+	m_iExtraHappinessPerLuxury = 0;
+#endif
+#ifdef TRAIT_NO_CARGO_PILLAGE
+	m_bNoCargoPillage = false;
 #endif
 #ifdef TRAIT_INTERNATIONAL_TRADE_ROUTE_YIELD_CHANGES
 	for (int iYield = 0; iYield < NUM_YIELD_TYPES; iYield++)

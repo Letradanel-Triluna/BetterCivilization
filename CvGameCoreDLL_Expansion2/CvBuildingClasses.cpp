@@ -1,5 +1,5 @@
 /*	-------------------------------------------------------------------------------------------------------
-	© 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
+	ï¿½ 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
 	Sid Meier's Civilization V, Civ, Civilization, 2K Games, Firaxis Games, Take-Two Interactive Software 
 	and their respective logos are all trademarks of Take-Two interactive Software, Inc.  
 	All other marks and trademarks are the property of their respective owners.  
@@ -3046,7 +3046,10 @@ void CvCityBuildings::SetNumRealBuildingTimed(BuildingTypes eIndex, int iNewValu
 		}
 
 		// Maintenance cost
-		if(buildingEntry->GetGoldMaintenance() != 0)
+		// BABYLON UA REWORK: science buildings have no maintenance for Babylon
+		bool bBabylonScienceFree = buildingEntry->IsScienceBuilding() &&
+			strcmp(pPlayer->getCivilizationTypeKey(), "CIVILIZATION_BABYLON") == 0;
+		if(buildingEntry->GetGoldMaintenance() != 0 && !bBabylonScienceFree)
 		{
 			pPlayer->GetTreasury()->ChangeBaseBuildingGoldMaintenance(buildingEntry->GetGoldMaintenance() * iChangeNumRealBuilding);
 		}

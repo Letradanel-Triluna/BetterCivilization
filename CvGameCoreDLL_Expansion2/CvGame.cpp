@@ -70,6 +70,34 @@
 #include "LintFree.h"
 
 //------------------------------------------------------------------------------
+// Local helper: UTF-8 -> UTF-16 conversion using Win32 directly.
+//
+// CvStringUtils::FromUTF8ToUTF16 (in CvGameCoreDLLUtilWin32.lib) was compiled
+// with VS2008 and returns std::wstring BY VALUE across a VS2008->VS2013 CRT
+// boundary.  Even though the wstring binary layout is identical in both
+// compiler versions, the IAT-resolved wstring constructor/operator calls that
+// execute inside the VS2008 function body may end up calling the wrong CRT's
+// vtable stubs due to /FORCE:MULTIPLE symbol resolution, producing a wstring
+// whose internal heap pointer is garbage (e.g. 0x3BF).  Passing that garbage
+// pointer to DeleteFileW / FFILESYSTEM.Create causes an access-violation deep
+// inside ntdll when it tries to read the filename.
+//
+// This helper performs the exact same conversion entirely in VS2013-compiled
+// code, so the returned wstring is 100% managed by a single consistent CRT.
+static std::wstring CvGame_Utf8ToWide(const char* utf8)
+{
+	if (!utf8 || !utf8[0])
+		return std::wstring();
+	int len = MultiByteToWideChar(CP_UTF8, 0, utf8, -1, NULL, 0);
+	if (len <= 0)
+		return std::wstring();
+	std::wstring result;
+	result.resize(static_cast<size_t>(len - 1));
+	MultiByteToWideChar(CP_UTF8, 0, utf8, -1, &result[0], len);
+	return result;
+}
+
+//------------------------------------------------------------------------------
 // CvGame Version History
 // Version 1 
 //	 * CvGame save version reset for expansion pack 2.
@@ -1126,7 +1154,10 @@ void CvGame::reset(HandicapTypes eHandicap, bool bConstructorCall)
 	CvString strUTF8DatabasePath = gDLL->GetCacheFolderPath();
 	strUTF8DatabasePath += "Civ5SavedGameDatabase.db";
 
-	std::wstring wstrDatabasePath = CvStringUtils::FromUTF8ToUTF16(strUTF8DatabasePath);
+	// Use CvGame_Utf8ToWide (local, VS2013-compiled) instead of
+	// CvStringUtils::FromUTF8ToUTF16 (VS2008 lib) to avoid the cross-CRT
+	// wstring-by-value ABI hazard that corrupts the returned pointer.
+	std::wstring wstrDatabasePath = CvGame_Utf8ToWide(strUTF8DatabasePath.c_str());
 
 	if(DeleteFileW(wstrDatabasePath.c_str()) == FALSE)
 	{
@@ -10786,8 +10817,10 @@ void CvGame::Read(FDataStream& kStream)
 		CvString strUTF8DatabasePath = gDLL->GetCacheFolderPath();
 		strUTF8DatabasePath += "Civ5SavedGameDatabase.db";
 
-		// Need to Convert the UTF-8 string into a wide character string.
-		std::wstring wstrDatabasePath = CvStringUtils::FromUTF8ToUTF16(strUTF8DatabasePath);
+		// Use CvGame_Utf8ToWide (local, VS2013-compiled) instead of
+		// CvStringUtils::FromUTF8ToUTF16 (VS2008 lib) to avoid the cross-CRT
+		// wstring-by-value ABI hazard that corrupts the returned pointer.
+		std::wstring wstrDatabasePath = CvGame_Utf8ToWide(strUTF8DatabasePath.c_str());
 
 		FIFile* pkFile = FFILESYSTEM.Create(wstrDatabasePath.c_str(), FIFile::modeWrite);
 		if (pkFile != NULL)

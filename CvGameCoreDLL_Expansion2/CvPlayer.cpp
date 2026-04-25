@@ -932,6 +932,15 @@ void CvPlayer::init(PlayerTypes eID)
 		GetTreasury()->ChangeCityConnectionTradeRouteGoldChange(GetPlayerTraits()->GetCityConnectionTradeRouteChange());
 		changeWonderProductionModifier(GetPlayerTraits()->GetWonderProductionModifier());
 		ChangeRouteGoldMaintenanceMod(GetPlayerTraits()->GetImprovementMaintenanceModifier());
+#ifdef TRAIT_EXTRA_HAPPINESS_PER_LUXURY
+		ChangeExtraHappinessPerLuxury(GetPlayerTraits()->GetExtraHappinessPerLuxury());
+#endif
+#ifdef TRAIT_NO_CARGO_PILLAGE
+		if (GetPlayerTraits()->IsNoCargoPillage())
+		{
+			ChangeNoCargoPillage(1);
+		}
+#endif
 
 		for(iJ = 0; iJ < NUM_YIELD_TYPES; iJ++)
 		{
@@ -14808,6 +14817,11 @@ int CvPlayer::GetHappinessFromResources() const
 
 			iTotalHappiness += iBaseHappiness;
 			iTotalHappiness += GetExtraHappinessPerLuxury();
+			// INDONESIA UA REWORK: +1 happiness per luxury resource owned
+			if(strcmp(getCivilizationTypeKey(), "CIVILIZATION_INDONESIA") == 0)
+			{
+				iTotalHappiness += 1;
+			}
 		}
 	}
 

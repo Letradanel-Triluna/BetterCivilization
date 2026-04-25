@@ -730,6 +730,10 @@
 #define TRAIT_EXTRA_FOUNDED_CITY_TERRITORY_CLAIM_RANGE_AFTER_ERA
 ///
 #define TRAIT_FREE_POPULATION_AFTER_ERA
+///
+#define TRAIT_EXTRA_HAPPINESS_PER_LUXURY
+///
+#define TRAIT_NO_CARGO_PILLAGE
 /*UA CHANGES END*/
 
 
@@ -1605,7 +1609,7 @@
 #define GRAPHS_REAL_MILITARY_MIGHT
 ///
 // A more flexible alternative to Replay Messages; primarily for statistics purposes
-#define REPLAY_EVENTS
+// #define REPLAY_EVENTS  // disabled: requires winsqlite3.h not available in current SDK
 
 // Adds timestamp for replay messages, saves chat messages
 #define REPLAY_MESSAGE_EXTENDED

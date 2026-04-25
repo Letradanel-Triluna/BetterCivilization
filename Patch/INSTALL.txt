@@ -1,0 +1,56 @@
+================================================================
+  BetterCivilization Patch — Installation Guide
+  Руководство по установке
+================================================================
+
+ENGLISH
+-------
+
+Requirements:
+  • Sid Meier's Civilization V (Steam)
+  • Brave New World expansion
+  • Tournament Mod V12.2a already installed
+
+Installation:
+  1. Close Civilization V if it is running.
+
+  2. Open this archive and go into the "Files" folder.
+
+  3. Copy ALL contents of the "Files" folder into:
+       ...\Steam\steamapps\common\Sid Meier's Civilization V\
+                Assets\DLC\Tournament Mod V12.2a\
+
+     When prompted — choose "Replace" / "Overwrite".
+
+  4. Launch Civilization V. The patch is active automatically
+     when you load the Tournament Mod.
+
+  ! Do not rename or move any files. Folder structure matters.
+
+
+РУССКИЙ
+-------
+
+Требования:
+  • Sid Meier's Civilization V (Steam)
+  • Дополнение Brave New World
+  • Tournament Mod V12.2a уже установлен
+
+Установка:
+  1. Закройте Civilization V если игра запущена.
+
+  2. Откройте этот архив и зайдите в папку "Files".
+
+  3. Скопируйте ВСЁ содержимое папки "Files" в:
+       ...\Steam\steamapps\common\Sid Meier's Civilization V\
+                Assets\DLC\Tournament Mod V12.2a\
+
+     При запросе — выберите "Заменить" / "Перезаписать".
+
+  4. Запустите Civilization V. Патч работает автоматически
+     при загрузке Tournament Mod.
+
+  ! Не переименовывайте и не перемещайте файлы.
+    Структура папок важна.
+
+================================================================

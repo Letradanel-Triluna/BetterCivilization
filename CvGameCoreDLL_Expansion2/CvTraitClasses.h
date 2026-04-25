@@ -1,5 +1,5 @@
 /*	-------------------------------------------------------------------------------------------------------
-	© 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
+	ï¿½ 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
 	Sid Meier's Civilization V, Civ, Civilization, 2K Games, Firaxis Games, Take-Two Interactive Software 
 	and their respective logos are all trademarks of Take-Two interactive Software, Inc.  
 	All other marks and trademarks are the property of their respective owners.  
@@ -207,6 +207,12 @@ public:
 #ifdef TRAIT_FREE_POPULATION_AFTER_ERA
 	int GetFreePopulationAfterEra(int i) const;
 #endif
+#ifdef TRAIT_EXTRA_HAPPINESS_PER_LUXURY
+	int GetExtraHappinessPerLuxury() const;
+#endif
+#ifdef TRAIT_NO_CARGO_PILLAGE
+	bool IsNoCargoPillage() const;
+#endif
 
 	virtual bool CacheResults(Database::Results& kResults, CvDatabaseUtility& kUtility);
 
@@ -358,6 +364,12 @@ protected:
 #endif
 #ifdef TRAIT_FREE_POPULATION_AFTER_ERA
 	int* m_paiFreePopulationAfterEra;
+#endif
+#ifdef TRAIT_EXTRA_HAPPINESS_PER_LUXURY
+	int m_iExtraHappinessPerLuxury;
+#endif
+#ifdef TRAIT_NO_CARGO_PILLAGE
+	bool m_bNoCargoPillage;
 #endif
 
 private:
@@ -887,6 +899,18 @@ public:
 #ifdef TRAIT_FREE_POPULATION_AFTER_ERA
 	int GetiFreePopulationAfterEra(EraTypes eEra) const;
 #endif
+#ifdef TRAIT_EXTRA_HAPPINESS_PER_LUXURY
+	int GetExtraHappinessPerLuxury() const
+	{
+		return m_iExtraHappinessPerLuxury;
+	};
+#endif
+#ifdef TRAIT_NO_CARGO_PILLAGE
+	bool IsNoCargoPillage() const
+	{
+		return m_bNoCargoPillage;
+	};
+#endif
 
 	// Serialization
 	void Read(FDataStream& kStream);
@@ -1048,6 +1072,12 @@ private:
 #endif
 #ifdef TRAIT_FREE_POPULATION_AFTER_ERA
 	int m_paiFreePopulationAfterEra[NUM_ERA_TYPES];
+#endif
+#ifdef TRAIT_EXTRA_HAPPINESS_PER_LUXURY
+	int m_iExtraHappinessPerLuxury;
+#endif
+#ifdef TRAIT_NO_CARGO_PILLAGE
+	bool m_bNoCargoPillage;
 #endif
 };
 

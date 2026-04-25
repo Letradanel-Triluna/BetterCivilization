@@ -6751,6 +6751,12 @@ bool CvUnit::canPlunderTradeRoute(const CvPlot* pPlot, bool bOnlyTestVisibility)
 				return false;
 			}
 
+			// VENICE UA REWORK: Venice trade routes cannot be pillaged
+			if(strcmp(GET_PLAYER(eTradeUnitOwner).getCivilizationTypeKey(), "CIVILIZATION_VENICE") == 0)
+			{
+				return false;
+			}
+
 #if defined POLICY_NO_CARGO_PILLAGE || defined NO_OUTCOMING_INTERNATIONAL_CARAVAN_PILLAGE
 			CvGameTrade* pTrade = GC.getGame().GetGameTrade();
 			int iTradeConnectionIndex = pTrade->GetIndexFromID(aiTradeUnitsAtPlot[0]);

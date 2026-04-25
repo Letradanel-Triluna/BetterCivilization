@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(dir \"C:\\\\Users\\\\Letra\\\\OneDrive\\\\Документы\\\\GitHub\\\\BetterCivilization\" /s /b)",
-      "Bash(findstr /i \"polic\")"
+      "Bash(findstr /i \"polic\")",
+      "Bash(where msbuild *)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "PowerShell(Get-Command msbuild -ErrorAction SilentlyContinue)",
+      "Bash(cmd /c \"where devenv\")",
+      "Bash(cmd /c \"where msbuild\")",
+      "Bash(cmd /c \"dir /b /s \\\\\"C:\\\\\\\\Program Files\\\\\\\\Microsoft Visual Studio\\\\\\\\\\\\\" 2>&1 | findstr msbuild\")",
+      "PowerShell([System.IO.DriveInfo]::GetDrives\\(\\) | Select-Object Name, DriveType, IsReady)",
+      "Bash(cmd /c \"wmic logicaldisk get caption\")",
+      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\Microsoft Visual Studio\" -Directory -ErrorAction SilentlyContinue | ForEach-Object { $_.FullName })"
     ]
   }
 }
