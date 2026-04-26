@@ -1,48 +1,62 @@
 ﻿## v0.2 - 2026-04-26
 
-### New Civilizations Features
+### Civilizations
 
 **Aztec - Gold from Kills**
-- Sacrificial Captives trait now grants gold equal to the unit's combat strength on kill (e.g. killing a strength-30 unit yields 30 gold).
+- Sacrificial Captives now grants gold equal to the killed unit's Combat Strength on kill.
 
 **China - Growth & Farms**
-- The Art of War trait now adds +15% city growth and +1 food to every Farm improvement.
+- Art of War trait gives +15% city growth.
+- Every Farm improvement provides +1 Food.
+- Granary, Aqueduct and Hospital each provide +1 Food.
 
 **Assyria - Combat on Enemy Soil**
-- The Slayer of Tiamat trait grants +15% combat strength when fighting in tiles owned by a major-civ enemy (does not apply to city-states or barbarians).
+- Slayer of Tiamat grants +15% Combat Strength when fighting on tiles owned by a major-civ enemy (not city-states or barbarians).
+- Royal Library now also provides +1 Culture.
 
-**Denmark - Naval Movement Through Ice**
-- The Viking Fury trait now allows naval units to enter impassable ice tiles (Arctic exploration without needing the Astronomy technology workaround).
+**Denmark - Naval Through Ice**
+- Viking Fury now allows naval units to enter impassable ice tiles.
 
-**Byzantium - Faith Generation Rework**
-- The Patriarch of Constantinople trait now generates +1 Faith for every Great Work specialist (Writer, Artist, Musician, Scientist, Merchant, Engineer).
-- Also grants +3 Faith for Great Work tile improvements (Landmark, Academy, Customs House, Manufactory, Citadel).
-- Hippodrome now provides +1 Food in addition to its existing bonuses.
+**Byzantium - Faith Rework**
+- Patriarch of Constantinople grants +1 Faith per Great Work specialist (Writer, Artist, Musician, Scientist, Merchant, Engineer).
+- Also grants +3 Faith from Great Work tile improvements (Landmark, Academy, Customs House, Manufactory, Citadel).
+- Hippodrome now provides +1 Food.
 
-### Policy & Building Tweaks
+**France - Chateau Rework**
+- Chateau improvement now unlocks its +1 Culture and +2 Gold bonus at Architecture (was: Flight). Effective from the Medieval era instead of the Modern era.
 
-**Scholasticism** - Now grants +5% Culture for every City-State you are an ally of (in addition to its existing science bonus).
+**Egypt - Burial Tomb Buff**
+- Burial Tomb now provides +10 Gold.
 
-**Rationalism Finisher** - Now grants +2 Science per improved Strategic Resource (Horses, Iron, Coal, Oil, Aluminum, Uranium) in addition to +1 Happiness.
+**Celts - Jewellery Workshop Buff**
+- Helvetic Jewellery Workshop now also provides +2 Faith.
 
-### Rebalance
+**Venice - Serenissima Rework**
+- Trade route capacity is doubled.
+- Venetian Caravans cannot be plundered.
 
-**Archer - Penalty vs. Cities and Siege Units**
-- Archers (and their upgrades, Composite Bowmen) now suffer a -33% combat penalty when attacking cities or siege units. This prevents the early-game archer-rush from being disproportionately dominant.
+**Portugal - Torre de Belem (Bug Fix)**
+- Fixed: Torre de Belem now correctly grants +1 Happiness and +10% defensive strength to coastal cities.
 
-### Bug Fixes
+**Indonesia - Spice Islanders (Bug Fix)**
+- Fixed wonder happiness calculation bug.
+- Now grants +1 Happiness from every luxury resource you own.
 
-**Venice - Trade Route Bug Fixed**
-- Trade routes from Venice were incorrectly able to target occupied cities (puppet-city slots from Merchant of Venice). Fixed.
+### Policies
 
-**Venice - Pillage Immunity Bug Fixed**
-- Venice's Merchant of Venice units could incorrectly pillage certain improvements. Fixed.
+**Meritocracy**
+- Each city now causes 10% less unhappiness from city count.
 
-**Portugal - Torre de Belem**
-- Fixed a bug where the Torre de Belem wonder was not providing its intended +1 Happiness and +10% Defense bonus to coastal cities.
+**Scholasticism**
+- Now grants +5% Culture for every City-State ally.
 
-**Indonesia - Wonder Happiness**
-- Fixed a crash/incorrect-value bug that occurred when Indonesia's unique wonders applied their happiness bonuses.
+**Rationalism Finisher**
+- Now grants +2 Science per improved Strategic Resource.
+
+### Units & Combat
+
+**Archers - Penalty vs. Cities and Siege**
+- All Archer-class units (Archer, Composite Bowman, etc.) deal -33% Combat Strength when attacking a city or siege unit.
 
 ================================================================
   BetterCivilization Balance Patch — Changelog
