@@ -49,7 +49,7 @@
       <PreprocessorDefinitions>FXS_IS_DLL;WIN32;NDEBUG;_WINDOWS;_USRDLL;CVGAMECOREDLL_EXPORTS;FINAL_RELEASE;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>
       </ExceptionHandling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Strict</FloatingPointModel>
@@ -77,7 +77,7 @@
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ModuleDefinitionFile>$(ProjectDir)CvGameCoreDLL.def</ModuleDefinitionFile>
-      <AdditionalOptions>/FORCE:MULTIPLE /SAFESEH:NO /NODEFAULTLIB:MSVCRT /MAP %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/FORCE:MULTIPLE /SAFESEH:NO /MAP %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
