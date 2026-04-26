@@ -1,5 +1,5 @@
 /*	-------------------------------------------------------------------------------------------------------
-	© 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
+	ï¿½ 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
 	Sid Meier's Civilization V, Civ, Civilization, 2K Games, Firaxis Games, Take-Two Interactive Software 
 	and their respective logos are all trademarks of Take-Two interactive Software, Inc.  
 	All other marks and trademarks are the property of their respective owners.  
@@ -3863,11 +3863,13 @@ struct TradePathCacheData
 	bool m_bCanEmbarkAllWaterPassage;
 	bool m_bIsRiverTradeRoad;
 	bool m_bIsMoveFriendlyWoodsAsRoad;
+	bool m_bNavalMoveThroughIce;
 
 	inline CvTeam& getTeam() const { return *m_pTeam; }
 	inline bool CanEmbarkAllWaterPassage() const { return m_bCanEmbarkAllWaterPassage; }
 	inline bool IsRiverTradeRoad() const { return m_bIsRiverTradeRoad; }
 	inline bool IsMoveFriendlyWoodsAsRoad() const { return m_bIsMoveFriendlyWoodsAsRoad; }
+	inline bool IsNavalMoveThroughIce() const { return m_bNavalMoveThroughIce; }
 };
 
 //	--------------------------------------------------------------------------------
@@ -3887,11 +3889,13 @@ void TradePathInitialize(const void* pointer, CvAStar* finder)
 	{
 		pCacheData->m_bIsRiverTradeRoad = pPlayerTraits->IsRiverTradeRoad();
 		pCacheData->m_bIsMoveFriendlyWoodsAsRoad = pPlayerTraits->IsMoveFriendlyWoodsAsRoad();
+		pCacheData->m_bNavalMoveThroughIce = pPlayerTraits->IsNavalMoveThroughIce();
 	}
 	else
 	{
 		pCacheData->m_bIsRiverTradeRoad = false;
 		pCacheData->m_bIsMoveFriendlyWoodsAsRoad = false;
+		pCacheData->m_bNavalMoveThroughIce = false;
 	}
 
 }
@@ -4108,7 +4112,11 @@ int TradeRouteWaterValid(CvAStarNode* parent, CvAStarNode* node, int data, const
 
 		if(pNewPlot->isImpassable())
 		{
-			return FALSE;
+			// Denmark (Viking Fury): naval trade routes can pass through ice tiles
+			if(!pCacheData->IsNavalMoveThroughIce())
+			{
+				return FALSE;
+			}
 		}
 	}
 

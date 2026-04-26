@@ -1,140 +1,133 @@
-﻿## v0.2 - 2026-04-26
-
-### Civilizations
-
-**Aztec - Gold from Kills**
-- Sacrificial Captives now grants gold equal to the killed unit's Combat Strength on kill.
-
-**China - Growth & Farms**
-- Art of War trait gives +15% city growth.
-- Every Farm improvement provides +1 Food.
-- All food buildings (Granary, Watermill, Aqueduct, Hospital, Lighthouse, Barn) each provide +1 Food.
-
-**Assyria - Combat on Enemy Soil**
-- Slayer of Tiamat grants +15% Combat Strength when fighting on tiles owned by a major-civ enemy (not city-states or barbarians).
-- Royal Library now also provides +1 Culture.
-
-**Denmark - Terrain Yields & Naval Ice**
-- Viking Fury now allows naval units to enter impassable ice tiles.
-- Snow tiles now yield +1 Food, +1 Production, and +1 Faith for Danish cities.
-- Tundra tiles now yield +1 Production for Danish cities.
-
-**Byzantium - Faith Rework**
-- Patriarch of Constantinople grants +1 Faith per Great Work specialist (Writer, Artist, Musician, Scientist, Merchant, Engineer).
-- Also grants +3 Faith from Great Work tile improvements (Landmark, Academy, Customs House, Manufactory, Citadel).
-- Hippodrome now provides +1 Food.
-
-**France - Chateau Rework**
-- Chateau improvement now unlocks its +1 Culture and +2 Gold bonus at Architecture (was: Flight). Effective from the Medieval era instead of the Modern era.
-
-**Egypt - Burial Tomb Buff**
-- Burial Tomb now provides +10 Gold.
-
-**Celts - Jewellery Workshop Buff**
-- Helvetic Jewellery Workshop now also provides +2 Faith.
-
-**Venice - Serenissima Rework**
-- Trade route capacity is doubled.
-- Venetian Caravans cannot be plundered.
-
-**Portugal - Torre de Belem (Bug Fix)**
-- Fixed: Torre de Belem now correctly grants +1 Happiness and +10% defensive strength to coastal cities.
-
-**Indonesia - Spice Islanders (Bug Fix)**
-- Fixed wonder happiness calculation bug.
-- Now grants +1 Happiness from every luxury resource you own.
-
-### Policies
-
-**Meritocracy**
-- Each city now causes 10% less unhappiness from city count.
-
-**Scholasticism**
-- Now grants +5% Culture for every City-State ally.
-
-**Rationalism Finisher**
-- Now grants +2 Science per improved Strategic Resource.
-
-### Units & Combat
-
-**Archers - Penalty vs. Cities and Siege**
-- All Archer-class units (Archer, Composite Bowman, etc.) deal -33% Combat Strength when attacking a city or siege unit.
-
 ================================================================
-  BetterCivilization Balance Patch — Changelog
-  Tournament Mod V12.2a
+  BetterCivilization Balance Patch
+  Full Changelog vs. Base Game
 ================================================================
 
---- BALANCE CHANGES ---
+This section summarizes ALL balance changes introduced by the
+BetterCivilization mod across all versions relative to vanilla
+Brave New World. Bug fixes are listed separately.
 
-[HUNS]
-• +1 Food, +1 Production, +1 Gold on Horse resource tiles.
-  Bonus activates when the Horse tile is worked by a city —
-  which happens naturally after researching Animal Husbandry
-  (the tech that reveals horses on the map).
+--- CIVILIZATIONS ---
+
+[AZTEC]
+• Sacrificial Captives: on killing a unit, earn Gold equal to
+  that unit's Combat Strength (in addition to Culture).
+
+[CHINA]
+• Art of War: +15% City Growth.
+• Every Farm improvement provides +1 Food for Chinese cities.
+• Every food building (Granary, Watermill, Aqueduct, Hospital,
+  Lighthouse, Barn) provides +1 Food for Chinese cities.
+
+[ASSYRIA]
+• Slayer of Tiamat: +15% Combat Strength when fighting on tiles
+  owned by a major-civ enemy (does not apply vs. city-states or
+  barbarians).
+• Royal Library now also provides +1 Culture.
+
+[DENMARK]
+• Viking Fury: naval units can enter impassable ice tiles.
+• Viking Fury: trade routes can be routed through ice tiles
+  (ocean navigation required).
+• Snow tiles yield +1 Food, +1 Production, and +1 Faith for
+  Danish-owned cities.
+• Tundra tiles yield +1 Production for Danish-owned cities.
+
+[BYZANTIUM]
+• Patriarch of Constantinople: +1 Faith per Great Work
+  specialist (Writer, Artist, Musician, Scientist, Merchant,
+  Engineer) working in any city.
+• Patriarch of Constantinople: +3 Faith from Great Person tile
+  improvements (Landmark, Academy, Customs House, Manufactory,
+  Citadel).
+• Hippodrome: now also provides +1 Food.
+
+[FRANCE]
+• Chateau improvement: the +1 Culture / +2 Gold bonus now
+  unlocks at Architecture (Medieval era) instead of Flight
+  (Modern era).
+
+[EGYPT]
+• Burial Tomb: now provides +10% Gold yield in the city.
+
+[CELTS]
+• Helvetic Jewellery Workshop: now also provides +2 Faith.
 
 [VENICE]
-• Maximum number of Trade Routes doubled (+100% to Trade Route cap).
-• Venice Trade Routes cannot be pillaged by enemy units.
+• Serenissima: maximum Trade Route capacity is doubled.
+• Venetian Trade Routes cannot be plundered by enemy units.
 
-[PORTUGAL — Torre de Belem]
-• Happiness bonus increased from +1 to +2.
-• Provides enhanced City Defense in the city where it is built
-  (local bonus, not global).
+[HUNS]
+• Scourge of God: Horse resource tiles yield +1 Food,
+  +1 Production, and +1 Gold when worked by a city.
+
+--- SOCIAL POLICIES ---
+
+[MERITOCRACY]
+• Each city causes 10% less unhappiness from city count
+  (previously no bonus).
+
+[SCHOLASTICISM]
+• Now grants +5% Culture for every City-State ally
+  (replaces the old +5% Science diplomat bonus; the diplomat
+  culture bonus has been removed).
+
+[RATIONALISM FINISHER]
+• Grants +2 Science per improved Strategic Resource.
+
+--- UNITS & COMBAT ---
 
 [ALL ARCHER-CLASS UNITS]
   Applies to: Archer, Composite Bowman, Crossbowman,
   Chu-Ko-Nu, Longbowman, Bowman, Atlatlist, Machine Gun,
   Gatling Gun, Bazooka, and Barbarian equivalents.
 
-• −33% Combat Strength when attacking Cities.
-• −33% Combat Strength when attacking Siege units.
-
---- BUG FIXES ---
-
-• Fixed Portugal's civilization description incorrectly
-  displaying Venice's "Trade Routes cannot be pillaged" text.
-  Mare Clausum now shows the correct description.
+• −33% Combat Strength when attacking a City.
+• −33% Combat Strength when attacking a Siege unit.
 
 ================================================================
 
 
 ================================================================
-  BetterCivilization — Список изменений
-  Tournament Mod V12.2a
+  PER-VERSION PATCH NOTES
 ================================================================
 
---- БАЛАНС ---
+--- v0.1 (Tournament Mod V12.2a) ---
 
-[ГУННЫ]
-• +1 Еда, +1 Молоток, +1 Золото на клетках с ресурсом Лошадь.
-  Бонус активируется когда город обрабатывает клетку с лошадью —
-  что происходит естественным образом после изучения
-  Животноводства (техи, раскрывающей лошадей на карте).
+New in this version:
 
-[ВЕНЕЦИЯ]
-• Максимальное количество торговых путей удвоено (+100% к лимиту).
-• Торговые пути Венеции не могут быть разграблены врагом.
+[HUNS] Horse tile yields
+[VENICE] Doubled trade routes + cannot be plundered
+[PORTUGAL] Torre de Belem — happiness + coastal city defense
+[ARCHERS] −33% vs. Cities and Siege units
 
-[ПОРТУГАЛИЯ — Торре-де-Белем]
-• Бонус к Счастью увеличен с +1 до +2.
-• Дает усиленную защиту только в том городе,
-  где построено здание (местный бонус, не глобальный).
+--- Bug Fixes ---
+• Fixed Portugal civilization description showing Venice's
+  trade-route text instead of Mare Clausum.
 
-[ВСЕ ЮНИТЫ ТИПА "ЛУЧНИК"]
-  Применяется к: Лучник, Составной лук, Арбалетчик,
-  Чу-Ко-Ну, Лонгбоумен, Bowman, Атлатлист, Пулемёт,
-  Митральеза, Базука и их варварские аналоги.
 
-• −33% боевой силы при атаке Городов.
-• −33% боевой силы при атаке Осадных орудий.
+--- v0.2 — 2026-04-26 ---
 
---- ИСПРАВЛЕНИЯ ---
+New in this version:
 
-• Исправлено описание цивилизации Португалии —
-  ошибочно отображался текст Венеции
-  ("Торговые пути нельзя разграбить").
-  Теперь Mare Clausum показывает правильное описание.
+[AZTEC]    Sacrificial Captives: Gold from kills
+[CHINA]    +15% city growth (was no bonus), farms +1 food,
+           all food buildings +1 food
+[ASSYRIA]  +15% on enemy tiles, Royal Library +1 Culture
+[DENMARK]  Naval + trade-route ice passage; snow/tundra yields
+[BYZANTIUM] Faith rework: specialists + GP improvements + Hippodrome
+[FRANCE]   Chateau bonus moved from Flight → Architecture
+[EGYPT]    Burial Tomb +10% Gold
+[CELTS]    Helvetic Jewellery Workshop +2 Faith
+
+[MERITOCRACY]         −10% city-count unhappiness per city
+[SCHOLASTICISM]       +5% Culture per City-State ally
+[RATIONALISM FINISHER] +2 Science per improved Strategic Resource
+
+--- Bug Fixes ---
+• Portugal Torre de Belem now correctly provides Happiness and
+  10% defensive strength to the coastal city where it is built.
+• Indonesia Spice Islanders wonder happiness calculation fixed;
+  now correctly grants +1 Happiness per luxury resource owned.
 
 ================================================================
-
