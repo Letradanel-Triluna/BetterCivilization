@@ -2503,7 +2503,13 @@ bool CvUnit::canEnterTerrain(const CvPlot& enterPlot, byte bMoveFlags) const
 	{
 		if(!(m_iCanMoveImpassableCount > 0) && !canMoveAllTerrain())
 		{
-			return false;
+			// Denmark: naval units can move through ice tiles
+			bool bNavalThroughIce = (getDomainType() == DOMAIN_SEA && enterPlot.isWater() &&
+				GET_PLAYER(getOwner()).GetPlayerTraits()->IsNavalMoveThroughIce());
+			if (!bNavalThroughIce)
+			{
+				return false;
+			}
 		}
 	}
 
@@ -11803,6 +11809,18 @@ int CvUnit::GetGenericMaxStrengthModifier(const CvUnit* pOtherUnit, const CvPlot
 			}
 #endif
 		}
+
+		// Trait: bonus when fighting on enemy territory (Assyria)
+		iTempModifier = GET_PLAYER(getOwner()).GetPlayerTraits()->GetCombatBonusOnEnemyTile();
+		if (iTempModifier > 0 && pBattlePlot != NULL)
+		{
+			PlayerTypes eBattlePlotOwner = pBattlePlot->getOwner();
+			if (eBattlePlotOwner != NO_PLAYER && eBattlePlotOwner != getOwner() &&
+				!GET_PLAYER(eBattlePlotOwner).isMinorCiv() && !GET_PLAYER(eBattlePlotOwner).isBarbarian())
+			{
+				iModifier += iTempModifier;
+			}
+		}
 	}
 
 	////////////////////////
@@ -12720,6 +12738,18 @@ int CvUnit::GetMaxRangedCombatStrength(const CvUnit* pOtherUnit, const CvCity* p
 				}
 #endif
 			}
+
+			// Trait: bonus when fighting on enemy territory (Assyria)
+			iTempModifier = GET_PLAYER(getOwner()).GetPlayerTraits()->GetCombatBonusOnEnemyTile();
+			if (iTempModifier > 0)
+			{
+				PlayerTypes ePlotOwner = plot()->getOwner();
+				if (ePlotOwner != NO_PLAYER && ePlotOwner != getOwner() &&
+					!GET_PLAYER(ePlotOwner).isMinorCiv() && !GET_PLAYER(ePlotOwner).isBarbarian())
+				{
+					iModifier += iTempModifier;
+				}
+			}
 #endif
 
 			// Bonus for fighting in one's lands
@@ -12988,6 +13018,18 @@ int CvUnit::GetMaxRangedCombatStrength(const CvUnit* pOtherUnit, const CvCity* p
 				iModifier += iTempModifier;
 			}
 #endif
+		}
+
+		// Trait: bonus when fighting on enemy territory (Assyria)
+		iTempModifier = GET_PLAYER(getOwner()).GetPlayerTraits()->GetCombatBonusOnEnemyTile();
+		if (iTempModifier > 0)
+		{
+			PlayerTypes ePlotOwner = plot()->getOwner();
+			if (ePlotOwner != NO_PLAYER && ePlotOwner != getOwner() &&
+				!GET_PLAYER(ePlotOwner).isMinorCiv() && !GET_PLAYER(ePlotOwner).isBarbarian())
+			{
+				iModifier += iTempModifier;
+			}
 		}
 
 		// Bonus for fighting in one's lands
@@ -13318,6 +13360,18 @@ int CvUnit::GetMaxRangedCombatStrength(const CvUnit* pOtherUnit, const CvCity* p
 #endif
 			}
 
+			// Trait: bonus when fighting on enemy territory (Assyria)
+			iTempModifier = GET_PLAYER(getOwner()).GetPlayerTraits()->GetCombatBonusOnEnemyTile();
+			if (iTempModifier > 0)
+			{
+				PlayerTypes ePlotOwner = plot()->getOwner();
+				if (ePlotOwner != NO_PLAYER && ePlotOwner != getOwner() &&
+					!GET_PLAYER(ePlotOwner).isMinorCiv() && !GET_PLAYER(ePlotOwner).isBarbarian())
+				{
+					iModifier += iTempModifier;
+				}
+			}
+
 			// Rough Ground
 			if(pTargetPlot->isRoughGround())
 				iModifier += roughRangedAttackModifier();
@@ -13577,6 +13631,18 @@ int CvUnit::GetMaxRangedCombatStrength(const CvUnit* pOtherUnit, const CvCity* p
 				iModifier += iTempModifier;
 			}
 #endif
+		}
+
+		// Trait: bonus when fighting on enemy territory (Assyria)
+		iTempModifier = GET_PLAYER(getOwner()).GetPlayerTraits()->GetCombatBonusOnEnemyTile();
+		if (iTempModifier > 0)
+		{
+			PlayerTypes ePlotOwner = plot()->getOwner();
+			if (ePlotOwner != NO_PLAYER && ePlotOwner != getOwner() &&
+				!GET_PLAYER(ePlotOwner).isMinorCiv() && !GET_PLAYER(ePlotOwner).isBarbarian())
+			{
+				iModifier += iTempModifier;
+			}
 		}
 
 		// Bonus for fighting in one's lands

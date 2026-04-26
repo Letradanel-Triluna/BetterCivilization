@@ -13226,6 +13226,7 @@ void CvPlayer::DoYieldBonusFromKill(YieldTypes eYield, UnitTypes eAttackingUnitT
 
 			case YIELD_GOLD:
 				iValue += GetPlayerPolicies()->GetNumericModifier(POLICYMOD_GOLD_FROM_KILLS);
+				iValue += GetPlayerTraits()->GetGoldFromKills();
 				break;
 
 			case YIELD_CULTURE:

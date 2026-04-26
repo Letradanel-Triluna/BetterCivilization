@@ -1,5 +1,5 @@
 /*	-------------------------------------------------------------------------------------------------------
-	© 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
+	ï¿½ 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
 	Sid Meier's Civilization V, Civ, Civilization, 2K Games, Firaxis Games, Take-Two Interactive Software 
 	and their respective logos are all trademarks of Take-Two interactive Software, Inc.  
 	All other marks and trademarks are the property of their respective owners.  
@@ -287,6 +287,8 @@ CvPolicyEntry::CvPolicyEntry(void):
 #ifdef POLICY_SPY_DETECTION
 	m_bSpyDetection(false),
 #endif
+	m_iCulturePerAllyModifier(0),
+	m_iSciencePerImprovedStrategicResource(0),
 	m_eFreeBuildingOnConquest(NO_BUILDING)
 {
 }
@@ -589,6 +591,8 @@ bool CvPolicyEntry::CacheResults(Database::Results& kResults, CvDatabaseUtility&
 #ifdef POLICY_SPY_DETECTION
 	m_bSpyDetection = kResults.GetBool("SpyDetection");
 #endif
+	m_iCulturePerAllyModifier = kResults.GetInt("CulturePerAllyModifier");
+	m_iSciencePerImprovedStrategicResource = kResults.GetInt("SciencePerImprovedStrategicResource");
 
 	//Arrays
 	const char* szPolicyType = GetType();
@@ -2302,6 +2306,16 @@ bool CvPolicyEntry::IsSpyDetection() const
 }
 #endif
 
+int CvPolicyEntry::GetCulturePerAllyModifier() const
+{
+	return m_iCulturePerAllyModifier;
+}
+
+int CvPolicyEntry::GetSciencePerImprovedStrategicResource() const
+{
+	return m_iSciencePerImprovedStrategicResource;
+}
+
 //=====================================
 // CvPolicyBranchEntry
 //=====================================
@@ -3221,6 +3235,30 @@ int CvPlayerPolicies::GetNumericModifier(PolicyModifierType eType)
 		}
 	}
 
+	return rtnValue;
+}
+
+/// Get culture % bonus per allied city-state (Scholasticism)
+int CvPlayerPolicies::GetCulturePerAllyModifier()
+{
+	int rtnValue = 0;
+	for(int i = 0; i < m_pPolicies->GetNumPolicies(); i++)
+	{
+		if(m_pabHasPolicy[i] && !IsPolicyBlocked((PolicyTypes)i))
+			rtnValue += m_pPolicies->GetPolicyEntry(i)->GetCulturePerAllyModifier();
+	}
+	return rtnValue;
+}
+
+/// Get flat science per improved strategic resource (Rationalism finisher)
+int CvPlayerPolicies::GetSciencePerImprovedStrategicResource()
+{
+	int rtnValue = 0;
+	for(int i = 0; i < m_pPolicies->GetNumPolicies(); i++)
+	{
+		if(m_pabHasPolicy[i] && !IsPolicyBlocked((PolicyTypes)i))
+			rtnValue += m_pPolicies->GetPolicyEntry(i)->GetSciencePerImprovedStrategicResource();
+	}
 	return rtnValue;
 }
 

@@ -91,7 +91,7 @@ OK "$sz MB"
 # ── 3. Update CHANGELOG.txt ───────────────────────────────────────────────────
 Step "Prepending $Version to CHANGELOG.txt"
 $date    = Get-Date -Format "yyyy-MM-dd"
-$header  = "## $Version — $date`r`n`r`n$Notes`r`n`r`n"
+$header  = "## $Version - $date`r`n`r`n$Notes`r`n`r`n"
 $old     = Get-Content $Changelog -Raw -Encoding UTF8
 Set-Content $Changelog -Value ($header + $old) -Encoding UTF8
 OK "CHANGELOG updated"
@@ -112,15 +112,9 @@ OK "Pushed to origin/main"
 Step "Creating GitHub release $Version"
 
 # Build release body with standard header
-$releaseBody = @"
-## Balance Patch $Version
-
-$Notes
-
----
-**Installation:** Unzip → run \`install.bat\` (auto-detects Steam path).
-Manual: copy \`Files\\\` into \`...\Steam\steamapps\common\Sid Meier's Civilization V\Assets\DLC\Tournament Mod V12.2a\\`
-"@
+$installLine1 = "**Installation:** Unzip -> run ``install.bat`` (auto-detects Steam path)."
+$installLine2 = "Manual: copy ``Files\`` into ``...\Steam\steamapps\common\Sid Meier's Civilization V\Assets\DLC\Tournament Mod V12.2a\``"
+$releaseBody = "## Balance Patch $Version`r`n`r`n$Notes`r`n`r`n---`r`n$installLine1`r`n$installLine2"
 
 gh release create $Version `
     --repo $Repo `

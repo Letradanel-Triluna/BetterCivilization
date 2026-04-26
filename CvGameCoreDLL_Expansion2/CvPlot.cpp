@@ -8297,6 +8297,9 @@ int CvPlot::calculateYield(YieldTypes eYield, bool bDisplay)
 					if(pkResourceInfo->getResourceUsage() == RESOURCEUSAGE_STRATEGIC)
 					{
 						iYield += GET_PLAYER(ePlayer).GetPlayerTraits()->GetYieldChangeStrategicResources(eYield);
+						// Rationalism finisher: +science per improved strategic resource
+						if(eYield == YIELD_SCIENCE && getImprovementType() != NO_IMPROVEMENT)
+							iYield += GET_PLAYER(ePlayer).GetPlayerPolicies()->GetSciencePerImprovedStrategicResource();
 					}
 #ifdef PORTUGAL_UA_REWORK
 					if (pkResourceInfo->getResourceUsage() == RESOURCEUSAGE_LUXURY)
@@ -11225,7 +11228,12 @@ int CvPlot::getYieldWithBuild(BuildTypes eBuild, YieldTypes eYield, bool bWithUp
 
 					// Extra yield from Resources with Trait
 					if(pkResourceInfo->getResourceUsage() == RESOURCEUSAGE_STRATEGIC)
+					{
 						iYield += GET_PLAYER(ePlayer).GetPlayerTraits()->GetYieldChangeStrategicResources(eYield);
+						// Rationalism finisher: +science per improved strategic resource
+						if(eYield == YIELD_SCIENCE && getImprovementType() != NO_IMPROVEMENT)
+							iYield += GET_PLAYER(ePlayer).GetPlayerPolicies()->GetSciencePerImprovedStrategicResource();
+					}
 #ifdef PORTUGAL_UA_REWORK
 					if (pkResourceInfo->getResourceUsage() == RESOURCEUSAGE_LUXURY)
 					{

@@ -1,3 +1,49 @@
+﻿## v0.2 - 2026-04-26
+
+### New Civilizations Features
+
+**Aztec - Gold from Kills**
+- Sacrificial Captives trait now grants gold equal to the unit's combat strength on kill (e.g. killing a strength-30 unit yields 30 gold).
+
+**China - Growth & Farms**
+- The Art of War trait now adds +15% city growth and +1 food to every Farm improvement.
+
+**Assyria - Combat on Enemy Soil**
+- The Slayer of Tiamat trait grants +15% combat strength when fighting in tiles owned by a major-civ enemy (does not apply to city-states or barbarians).
+
+**Denmark - Naval Movement Through Ice**
+- The Viking Fury trait now allows naval units to enter impassable ice tiles (Arctic exploration without needing the Astronomy technology workaround).
+
+**Byzantium - Faith Generation Rework**
+- The Patriarch of Constantinople trait now generates +1 Faith for every Great Work specialist (Writer, Artist, Musician, Scientist, Merchant, Engineer).
+- Also grants +3 Faith for Great Work tile improvements (Landmark, Academy, Customs House, Manufactory, Citadel).
+- Hippodrome now provides +1 Food in addition to its existing bonuses.
+
+### Policy & Building Tweaks
+
+**Scholasticism** - Now grants +5% Culture for every City-State you are an ally of (in addition to its existing science bonus).
+
+**Rationalism Finisher** - Now grants +2 Science per improved Strategic Resource (Horses, Iron, Coal, Oil, Aluminum, Uranium) in addition to +1 Happiness.
+
+### Rebalance
+
+**Archer - Penalty vs. Cities and Siege Units**
+- Archers (and their upgrades, Composite Bowmen) now suffer a -33% combat penalty when attacking cities or siege units. This prevents the early-game archer-rush from being disproportionately dominant.
+
+### Bug Fixes
+
+**Venice - Trade Route Bug Fixed**
+- Trade routes from Venice were incorrectly able to target occupied cities (puppet-city slots from Merchant of Venice). Fixed.
+
+**Venice - Pillage Immunity Bug Fixed**
+- Venice's Merchant of Venice units could incorrectly pillage certain improvements. Fixed.
+
+**Portugal - Torre de Belem**
+- Fixed a bug where the Torre de Belem wonder was not providing its intended +1 Happiness and +10% Defense bonus to coastal cities.
+
+**Indonesia - Wonder Happiness**
+- Fixed a crash/incorrect-value bug that occurred when Indonesia's unique wonders applied their happiness bonuses.
+
 ================================================================
   BetterCivilization Balance Patch — Changelog
   Tournament Mod V12.2a
@@ -75,3 +121,4 @@
   Теперь Mare Clausum показывает правильное описание.
 
 ================================================================
+

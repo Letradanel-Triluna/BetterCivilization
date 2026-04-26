@@ -8021,6 +8021,7 @@ int CvCity::foodDifferenceTimes100(bool bBottom, CvString* toolTipSink) const
 
 		// City Mod for player. Used for Policies and such
 		int iCityGrowthMod = GET_PLAYER(getOwner()).GetCityGrowthMod();
+		iCityGrowthMod += GET_PLAYER(getOwner()).GetPlayerTraits()->GetCityGrowthModifier();
 #ifdef BUILDING_FOOD_YIELD_MODIFIERS_GROTH
 		iCityGrowthMod += getYieldRateModifier(YIELD_FOOD);
 #endif
@@ -9221,6 +9222,8 @@ int CvCity::getJONSCulturePerTurn() const
 	iModifier += getCultureRateModifier();
 	// Player modifier
 	iModifier += GET_PLAYER(getOwner()).GetJONSCultureCityModifier();
+	// Scholasticism: +X% culture per allied city-state
+	iModifier += GET_PLAYER(getOwner()).GetPlayerPolicies()->GetCulturePerAllyModifier() * GET_PLAYER(getOwner()).GetNumAlliedCS();
 #ifdef POLICY_CAPITAL_CULTURE_MOD_PER_DIPLOMAT
 	if (isCapital())
 	{
@@ -9661,6 +9664,8 @@ int CvCity::getJONSCulturePerTurnTimes100() const
 	iModifier += getCultureRateModifier();
 	// Player modifier
 	iModifier += GET_PLAYER(getOwner()).GetJONSCultureCityModifier();
+	// Scholasticism: +X% culture per allied city-state
+	iModifier += GET_PLAYER(getOwner()).GetPlayerPolicies()->GetCulturePerAllyModifier() * GET_PLAYER(getOwner()).GetNumAlliedCS();
 #ifdef POLICY_CAPITAL_CULTURE_MOD_PER_DIPLOMAT
 	if (isCapital())
 	{

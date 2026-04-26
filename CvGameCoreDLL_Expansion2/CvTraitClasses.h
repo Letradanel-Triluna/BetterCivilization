@@ -118,6 +118,10 @@ public:
 	int GetLandTradeRouteRangeBonus() const;
 	int GetTradeReligionModifier() const;
 	int GetTradeBuildingModifier() const;
+	int GetGoldFromKills() const;
+	int GetCityGrowthModifier() const;
+	int GetCombatBonusOnEnemyTile() const;
+	bool IsNavalMoveThroughIce() const;
 
 	TechTypes GetFreeUnitPrereqTech() const;
 	ImprovementTypes GetCombatBonusImprovement() const;
@@ -284,6 +288,10 @@ protected:
 	int m_iLandTradeRouteRangeBonus;
 	int m_iTradeReligionModifier;
 	int m_iTradeBuildingModifier;
+	int m_iGoldFromKills;
+	int m_iCityGrowthModifier;
+	int m_iCombatBonusOnEnemyTile;
+	bool m_bNavalMoveThroughIce;
 
 	TechTypes m_eFreeUnitPrereqTech;
 	ImprovementTypes m_eCombatBonusImprovement;
@@ -690,6 +698,22 @@ public:
 	{
 		return m_iTradeBuildingModifier;
 	}
+	int GetGoldFromKills() const
+	{
+		return m_iGoldFromKills;
+	}
+	int GetCityGrowthModifier() const
+	{
+		return m_iCityGrowthModifier;
+	}
+	int GetCombatBonusOnEnemyTile() const
+	{
+		return m_iCombatBonusOnEnemyTile;
+	}
+	bool IsNavalMoveThroughIce() const
+	{
+		return m_bNavalMoveThroughIce;
+	}
 
 	bool IsFightWellDamaged() const
 	{
@@ -989,6 +1013,10 @@ private:
 	int m_iLandTradeRouteRangeBonus;
 	int m_iTradeReligionModifier;
 	int m_iTradeBuildingModifier;
+	int m_iGoldFromKills;
+	int m_iCityGrowthModifier;
+	int m_iCombatBonusOnEnemyTile;
+	bool m_bNavalMoveThroughIce;
 	// Saved
 
 	bool m_bFightWellDamaged;

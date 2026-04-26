@@ -1,5 +1,5 @@
 /*	-------------------------------------------------------------------------------------------------------
-	© 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
+	ï¿½ 1991-2012 Take-Two Interactive Software and its subsidiaries.  Developed by Firaxis Games.  
 	Sid Meier's Civilization V, Civ, Civilization, 2K Games, Firaxis Games, Take-Two Interactive Software 
 	and their respective logos are all trademarks of Take-Two interactive Software, Inc.  
 	All other marks and trademarks are the property of their respective owners.  
@@ -149,6 +149,8 @@ public:
 	int GetTradeRouteTourismModifier() const;
 	int GetOpenBordersTourismModifier() const;
 	int GetCityStateTradeChange() const;
+	int GetCulturePerAllyModifier() const;
+	int GetSciencePerImprovedStrategicResource() const;
 #ifdef POLICY_GOLD_PER_CS_FRIENDSHIP
 	int GetGoldPerCSFriendsip() const;
 #endif
@@ -441,6 +443,8 @@ private:
 	int m_iTradeRouteTourismModifier;
 	int m_iOpenBordersTourismModifier;
 	int m_iCityStateTradeChange;
+	int m_iCulturePerAllyModifier;
+	int m_iSciencePerImprovedStrategicResource;
 #ifdef POLICY_GOLD_PER_CS_FRIENDSHIP
 	int m_iGoldPerCSFriendsip;
 #endif
@@ -905,6 +909,9 @@ public:
 #ifdef POLICY_LEAGUE_SESSION_YIELD_BOOST_PER_DELEGATE
 	int GetLeagueSessionYieldBoostPerDelegateChanges(YieldTypes eYield);
 #endif
+
+	int GetCulturePerAllyModifier();
+	int GetSciencePerImprovedStrategicResource();
 
 private:
 	void AddFlavorAsStrategies(int iPropagatePercent);

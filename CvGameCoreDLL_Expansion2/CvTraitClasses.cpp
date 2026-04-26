@@ -542,6 +542,26 @@ int CvTraitEntry::GetTradeBuildingModifier() const
 	return m_iTradeBuildingModifier;
 }
 
+int CvTraitEntry::GetGoldFromKills() const
+{
+	return m_iGoldFromKills;
+}
+
+int CvTraitEntry::GetCityGrowthModifier() const
+{
+	return m_iCityGrowthModifier;
+}
+
+int CvTraitEntry::GetCombatBonusOnEnemyTile() const
+{
+	return m_iCombatBonusOnEnemyTile;
+}
+
+bool CvTraitEntry::IsNavalMoveThroughIce() const
+{
+	return m_bNavalMoveThroughIce;
+}
+
 /// Accessor: tech that triggers this free unit
 TechTypes CvTraitEntry::GetFreeUnitPrereqTech() const
 {
@@ -1074,6 +1094,10 @@ bool CvTraitEntry::CacheResults(Database::Results& kResults, CvDatabaseUtility& 
 	m_iLandTradeRouteRangeBonus				= kResults.GetInt("LandTradeRouteRangeBonus");
 	m_iTradeReligionModifier				= kResults.GetInt("TradeReligionModifier");
 	m_iTradeBuildingModifier				= kResults.GetInt("TradeBuildingModifier");
+	m_iGoldFromKills					= kResults.GetInt("GoldFromKills");
+	m_iCityGrowthModifier				= kResults.GetInt("CityGrowthModifier");
+	m_iCombatBonusOnEnemyTile			= kResults.GetInt("CombatBonusOnEnemyTile");
+	m_bNavalMoveThroughIce				= kResults.GetBool("NavalMoveThroughIce");
 
 	const char* szTextVal = NULL;
 	szTextVal = kResults.GetText("FreeUnit");
@@ -1674,6 +1698,11 @@ void CvPlayerTraits::InitPlayerTraits()
 			m_iLandTradeRouteRangeBonus += trait->GetLandTradeRouteRangeBonus();
 			m_iTradeReligionModifier += trait->GetTradeReligionModifier();
 			m_iTradeBuildingModifier += trait->GetTradeBuildingModifier();
+			m_iGoldFromKills += trait->GetGoldFromKills();
+			m_iCityGrowthModifier += trait->GetCityGrowthModifier();
+			m_iCombatBonusOnEnemyTile += trait->GetCombatBonusOnEnemyTile();
+			if(trait->IsNavalMoveThroughIce())
+				m_bNavalMoveThroughIce = true;
 
 			if(trait->IsFightWellDamaged())
 			{
@@ -1977,6 +2006,10 @@ void CvPlayerTraits::Reset()
 	m_iLandTradeRouteRangeBonus = 0;
 	m_iTradeReligionModifier = 0;
 	m_iTradeBuildingModifier = 0;
+	m_iGoldFromKills = 0;
+	m_iCityGrowthModifier = 0;
+	m_iCombatBonusOnEnemyTile = 0;
+	m_bNavalMoveThroughIce = false;
 
 	m_bFightWellDamaged = false;
 	m_bMoveFriendlyWoodsAsRoad = false;
@@ -3144,6 +3177,36 @@ void CvPlayerTraits::Read(FDataStream& kStream)
 		m_iTradeBuildingModifier = 0;
 	}
 
+	if (uiVersion >= 20
+#ifdef SAVE_BACKWARDS_COMPATIBILITY
+		&& uiVersion >= 1004
+#endif
+		)
+	{
+		kStream >> m_iGoldFromKills;
+		kStream >> m_iCityGrowthModifier;
+	}
+	else
+	{
+		m_iGoldFromKills = 0;
+		m_iCityGrowthModifier = 0;
+	}
+
+	if (uiVersion >= 21
+#ifdef SAVE_BACKWARDS_COMPATIBILITY
+		&& uiVersion >= 1005
+#endif
+		)
+	{
+		kStream >> m_iCombatBonusOnEnemyTile;
+		kStream >> m_bNavalMoveThroughIce;
+	}
+	else
+	{
+		m_iCombatBonusOnEnemyTile = 0;
+		m_bNavalMoveThroughIce = false;
+	}
+
 	kStream >> m_bFightWellDamaged;
 	kStream >> m_bMoveFriendlyWoodsAsRoad;
 	kStream >> m_bFasterAlongRiver;
@@ -3463,7 +3526,7 @@ void CvPlayerTraits::Read(FDataStream& kStream)
 void CvPlayerTraits::Write(FDataStream& kStream)
 {
 	// Current version number
-	uint uiVersion = 19;
+	uint uiVersion = 21;
 #ifdef SAVE_BACKWARDS_COMPATIBILITY
 	uiVersion = BUMP_SAVE_VERSION_TRAITS;
 #endif
@@ -3534,6 +3597,10 @@ void CvPlayerTraits::Write(FDataStream& kStream)
 	kStream << m_iLandTradeRouteRangeBonus;
 	kStream << m_iTradeReligionModifier;
 	kStream << m_iTradeBuildingModifier;
+	kStream << m_iGoldFromKills;
+	kStream << m_iCityGrowthModifier;
+	kStream << m_iCombatBonusOnEnemyTile;
+	kStream << m_bNavalMoveThroughIce;
 
 	kStream << m_bFightWellDamaged;
 	kStream << m_bMoveFriendlyWoodsAsRoad;
