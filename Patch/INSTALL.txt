@@ -11,19 +11,22 @@ Requirements:
   • Brave New World expansion
   • Tournament Mod V12.2a already installed
 
-Installation:
+Quick Install (recommended):
   1. Close Civilization V if it is running.
+  2. Extract this archive anywhere.
+  3. Run install.bat — it finds your Steam path automatically
+     and copies the files in place.
+  4. Launch Civilization V. The patch activates with the
+     Tournament Mod automatically.
 
-  2. Open this archive and go into the "Files" folder.
-
-  3. Copy ALL contents of the "Files" folder into:
+Manual Install (if install.bat fails):
+  1. Close Civilization V if it is running.
+  2. Open the extracted folder and go into "Files\".
+  3. Copy ALL contents of "Files\" into:
        ...\Steam\steamapps\common\Sid Meier's Civilization V\
                 Assets\DLC\Tournament Mod V12.2a\
-
      When prompted — choose "Replace" / "Overwrite".
-
-  4. Launch Civilization V. The patch is active automatically
-     when you load the Tournament Mod.
+  4. Launch Civilization V.
 
   ! Do not rename or move any files. Folder structure matters.
 
@@ -36,19 +39,22 @@ Installation:
   • Дополнение Brave New World
   • Tournament Mod V12.2a уже установлен
 
-Установка:
+Быстрая установка (рекомендуется):
   1. Закройте Civilization V если игра запущена.
+  2. Распакуйте архив в любую папку.
+  3. Запустите install.bat — он сам найдёт путь до Steam
+     и скопирует файлы куда нужно.
+  4. Запустите Civilization V. Патч активируется автоматически
+     вместе с Tournament Mod.
 
-  2. Откройте этот архив и зайдите в папку "Files".
-
-  3. Скопируйте ВСЁ содержимое папки "Files" в:
+Ручная установка (если install.bat не сработал):
+  1. Закройте Civilization V если игра запущена.
+  2. Откройте распакованную папку и зайдите в "Files\".
+  3. Скопируйте ВСЁ содержимое папки "Files\" в:
        ...\Steam\steamapps\common\Sid Meier's Civilization V\
                 Assets\DLC\Tournament Mod V12.2a\
-
      При запросе — выберите "Заменить" / "Перезаписать".
-
-  4. Запустите Civilization V. Патч работает автоматически
-     при загрузке Tournament Mod.
+  4. Запустите Civilization V.
 
   ! Не переименовывайте и не перемещайте файлы.
     Структура папок важна.
