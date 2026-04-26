@@ -6,7 +6,7 @@ echo   BetterCivilization Patch — Auto Installer
 echo ============================================================
 echo.
 
-rem ---- Find Steam path via registry ----
+rem ---- Find Steam installation path via registry ----
 set "STEAM_PATH="
 for /f "usebackq tokens=2*" %%a in (
   `reg query "HKCU\Software\Valve\Steam" /v "SteamPath" 2^>nul`
@@ -35,23 +35,68 @@ if not defined STEAM_PATH (
 rem Normalise slashes
 set "STEAM_PATH=%STEAM_PATH:/=\%"
 
-set "CIV_DIR=%STEAM_PATH%\steamapps\common\Sid Meier's Civilization V"
-set "MOD_DIR=%CIV_DIR%\Assets\DLC\Tournament Mod V12.2a"
+rem ---- Scan all Steam library folders for Civ5 ----
+set "CIV_COUNT=0"
 
-echo Steam found at : %STEAM_PATH%
-echo Civ5 folder    : %CIV_DIR%
-echo Mod folder     : %MOD_DIR%
-echo.
+rem libraryfolders.vdf lists all libraries including the default one
+set "VDF=%STEAM_PATH%\config\libraryfolders.vdf"
+if not exist "%VDF%" set "VDF=%STEAM_PATH%\steamapps\libraryfolders.vdf"
 
-rem ---- Verify Civ5 is installed at expected path ----
-if not exist "%CIV_DIR%\" (
-  echo [ERROR] Civ5 folder not found:
-  echo         %CIV_DIR%
+if exist "%VDF%" (
+  rem Each "path" line looks like:  [tabs]"path"[tabs]"D:\\SteamLibrary"
+  rem tokens=4 with delimiter " extracts the 4th quoted segment = the path value
+  for /f "usebackq tokens=4 delims=""" %%P in (`findstr /i "\"path\"" "%VDF%"`) do (
+    set "LIBPATH=%%P"
+    set "LIBPATH=!LIBPATH:/=\!"
+    call :check_library "!LIBPATH!"
+  )
+) else (
+  rem Fallback: only check the default Steam library
+  call :check_library "%STEAM_PATH%"
+)
+
+rem ---- Handle results ----
+if %CIV_COUNT%==0 (
+  echo [ERROR] Civilization V was not found in any Steam library.
   echo.
-  echo         If Civ5 is on a different drive, edit this script and set
-  echo         CIV_DIR manually near the top.
+  echo   Make sure Civ5 is installed via Steam, then re-run.
   goto :done
 )
+
+if %CIV_COUNT%==1 (
+  rem Only one installation found — use it automatically
+  set "CIV_DIR=!CIV_1!"
+  goto :install
+)
+
+rem ---- Multiple installations found — ask user to choose ----
+echo Found Civilization V in %CIV_COUNT% locations:
+echo.
+for /l %%i in (1,1,%CIV_COUNT%) do (
+  echo   [%%i] !CIV_%%i!
+)
+echo.
+
+:ask_choice
+set /p "CHOICE=Enter the number of your Civ5 installation [1-%CIV_COUNT%]: "
+
+set "CIV_DIR="
+for /l %%i in (1,1,%CIV_COUNT%) do (
+  if "!CHOICE!"=="%%i" set "CIV_DIR=!CIV_%%i!"
+)
+
+if not defined CIV_DIR (
+  echo   Invalid choice, please try again.
+  goto :ask_choice
+)
+
+:install
+set "MOD_DIR=%CIV_DIR%\Assets\DLC\Tournament Mod V12.2a"
+
+echo.
+echo Civ5 folder : %CIV_DIR%
+echo Mod folder  : %MOD_DIR%
+echo.
 
 rem ---- Verify Tournament Mod is installed ----
 if not exist "%MOD_DIR%\" (
@@ -86,6 +131,18 @@ echo   Done! Launch Civilization V and load Tournament Mod.
 echo ============================================================
 goto :done
 
+rem ================================================================
+:check_library
+rem  Checks if the given Steam library path contains Civ5.
+rem  If found, appends it to the CIV_x list.
+set "CHECK=%~1\steamapps\common\Sid Meier's Civilization V"
+if exist "%CHECK%\" (
+  set /a CIV_COUNT+=1
+  set "CIV_!CIV_COUNT!=%CHECK%"
+)
+exit /b
+
+rem ================================================================
 :copy_error
 echo.
 echo [ERROR] A file could not be copied. Check that Civ5 is closed
