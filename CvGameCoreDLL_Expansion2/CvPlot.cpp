@@ -8226,10 +8226,14 @@ int CvPlot::calculateYield(YieldTypes eYield, bool bDisplay)
 				if (!bDisplay || pWorkingCity->isRevealed(GC.getGame().getActiveTeam(), false))
 				{
 					iYield += pWorkingCity->GetTerrainExtraYield(getTerrainType(), eYield);
+					// Trait terrain yield (e.g. Viking Fury: snow/tundra bonuses)
+					iYield += GET_PLAYER(ePlayer).GetPlayerTraits()->GetTerrainYieldChange(getTerrainType(), eYield);
 				}
 
 #else
 				iYield += pWorkingCity->GetTerrainExtraYield(getTerrainType(), eYield);
+				// Trait terrain yield (e.g. Viking Fury: snow/tundra bonuses)
+				iYield += GET_PLAYER(ePlayer).GetPlayerTraits()->GetTerrainYieldChange(getTerrainType(), eYield);
 #endif
 			}
 #ifdef GREECE_UA_REWORK
@@ -11160,10 +11164,14 @@ int CvPlot::getYieldWithBuild(BuildTypes eBuild, YieldTypes eYield, bool bWithUp
 				if (pWorkingCity->isRevealed(eTeam, false))
 				{
 					iYield += pWorkingCity->GetTerrainExtraYield(getTerrainType(), eYield);
+					// Trait terrain yield (e.g. Viking Fury: snow/tundra bonuses)
+					iYield += GET_PLAYER(ePlayer).GetPlayerTraits()->GetTerrainYieldChange(getTerrainType(), eYield);
 				}
 
 #else
 				iYield += pWorkingCity->GetTerrainExtraYield(getTerrainType(), eYield);
+				// Trait terrain yield (e.g. Viking Fury: snow/tundra bonuses)
+				iYield += GET_PLAYER(ePlayer).GetPlayerTraits()->GetTerrainYieldChange(getTerrainType(), eYield);
 #endif
 			}
 #ifdef GREECE_UA_REWORK

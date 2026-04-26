@@ -1385,7 +1385,8 @@
 // 1003: v12.0  (adds TRAIT_EXTRA_FOUNDED_CITY_TERRITORY_CLAIM_RANGE_AFTER_ERA, TRAIT_FREE_POPULATION_AFTER_ERA)
 // 1004: v12.2  (adds GoldFromKills, CityGrowthModifier)
 // 1005: v12.2a (adds CombatBonusOnEnemyTile, NavalMoveThroughIce)
-# define BUMP_SAVE_VERSION_TRAITS 1005
+// 1006: v12.2a (adds Trait_TerrainYieldChanges / m_ppaaiTerrainYieldChange)
+# define BUMP_SAVE_VERSION_TRAITS 1006
 // 1000: v7.0   (initial)
 // 1001: v8.0   (adds NEW_WRITERS_CULTURE_BOMB)
 // 1002: v11.0  (adds PROMOTION_NO_UNHAPPINESS_PENALTY)

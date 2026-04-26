@@ -140,7 +140,8 @@ CvTraitEntry::CvTraitEntry() :
 #ifdef TRAIT_FREE_POPULATION_AFTER_ERA
 	m_paiFreePopulationAfterEra(NULL),
 #endif
-	m_ppiUnimprovedFeatureYieldChanges(NULL)
+	m_ppiUnimprovedFeatureYieldChanges(NULL),
+	m_ppaiTerrainYieldChange(NULL)
 {
 }
 
@@ -160,6 +161,7 @@ CvTraitEntry::~CvTraitEntry()
 	CvDatabaseUtility::SafeDelete2DArray(m_ppiBuildingClassYieldChanges);
 #endif
 	CvDatabaseUtility::SafeDelete2DArray(m_ppiUnimprovedFeatureYieldChanges);
+	CvDatabaseUtility::SafeDelete2DArray(m_ppaiTerrainYieldChange);
 }
 
 /// Accessor:: Modifier to experience needed for new level
@@ -834,6 +836,16 @@ int CvTraitEntry::GetUnimprovedFeatureYieldChanges(FeatureTypes eIndex1, YieldTy
 	return m_ppiUnimprovedFeatureYieldChanges ? m_ppiUnimprovedFeatureYieldChanges[eIndex1][eIndex2] : 0;
 }
 
+/// Accessor:: Extra yield from a terrain type (e.g. Viking Fury: snow/tundra bonuses)
+int CvTraitEntry::GetTerrainYieldChange(int i, int j) const
+{
+	CvAssertMsg(i < GC.getNumTerrainInfos(), "Index out of bounds");
+	CvAssertMsg(i > -1, "Index out of bounds");
+	CvAssertMsg(j < NUM_YIELD_TYPES, "Index out of bounds");
+	CvAssertMsg(j > -1, "Index out of bounds");
+	return m_ppaiTerrainYieldChange ? m_ppaiTerrainYieldChange[i][j] : 0;
+}
+
 /// Accessor:: Additional moves for a class of combat unit
 int CvTraitEntry::GetMovesChangeUnitCombat(const int unitCombatID) const
 {
@@ -1399,6 +1411,29 @@ bool CvTraitEntry::CacheResults(Database::Results& kResults, CvDatabaseUtility& 
 		}
 	}
 
+	//TerrainYieldChanges
+	{
+		kUtility.Initialize2DArray(m_ppaiTerrainYieldChange, "Terrains", "Yields");
+
+		std::string strKey("Trait_TerrainYieldChanges");
+		Database::Results* pResults = kUtility.GetResults(strKey);
+		if(pResults == NULL)
+		{
+			pResults = kUtility.PrepareResults(strKey, "select Terrains.ID as TerrainID, Yields.ID as YieldID, Yield from Trait_TerrainYieldChanges inner join Terrains on Terrains.Type = TerrainType inner join Yields on Yields.Type = YieldType where TraitType = ?");
+		}
+
+		pResults->Bind(1, szTraitType);
+
+		while(pResults->Step())
+		{
+			const int TerrainID = pResults->GetInt(0);
+			const int YieldID = pResults->GetInt(1);
+			const int yield = pResults->GetInt(2);
+
+			m_ppaiTerrainYieldChange[TerrainID][YieldID] = yield;
+		}
+	}
+
 	// NoTrain
 	{
 		int iUnitClassLoop;
@@ -1825,6 +1860,17 @@ void CvPlayerTraits::InitPlayerTraits()
 					}
 				}
 
+				for(int iTerrainLoop = 0; iTerrainLoop < GC.getNumTerrainInfos(); iTerrainLoop++)
+				{
+					int iChange = trait->GetTerrainYieldChange(iTerrainLoop, iYield);
+					if(iChange != 0)
+					{
+						Firaxis::Array<int, NUM_YIELD_TYPES> yields = m_ppaaiTerrainYieldChange[iTerrainLoop];
+						yields[iYield] = (m_ppaaiTerrainYieldChange[iTerrainLoop][iYield] + iChange);
+						m_ppaaiTerrainYieldChange[iTerrainLoop] = yields;
+					}
+				}
+
 				for(int iSpecialistLoop = 0; iSpecialistLoop < GC.getNumSpecialistInfos(); iSpecialistLoop++)
 				{
 					int iChange = trait->GetSpecialistYieldChanges((SpecialistTypes)iSpecialistLoop, (YieldTypes)iYield);
@@ -1934,6 +1980,7 @@ void CvPlayerTraits::Uninit()
 	m_ppaaiImprovementYieldChange.clear();
 	m_ppaaiSpecialistYieldChange.clear();
 	m_ppaaiUnimprovedFeatureYieldChange.clear();
+	m_ppaaiTerrainYieldChange.clear();
 	m_aFreeResourceXCities.clear();
 }
 
@@ -2040,6 +2087,8 @@ void CvPlayerTraits::Reset()
 	m_ppaaiSpecialistYieldChange.resize(GC.getNumSpecialistInfos());
 	m_ppaaiUnimprovedFeatureYieldChange.clear();
 	m_ppaaiUnimprovedFeatureYieldChange.resize(GC.getNumFeatureInfos());
+	m_ppaaiTerrainYieldChange.clear();
+	m_ppaaiTerrainYieldChange.resize(GC.getNumTerrainInfos());
 
 	Firaxis::Array< int, NUM_YIELD_TYPES > yield;
 	for(unsigned int j = 0; j < NUM_YIELD_TYPES; ++j)
@@ -2074,6 +2123,10 @@ void CvPlayerTraits::Reset()
 		for(int iFeature = 0; iFeature < GC.getNumFeatureInfos(); iFeature++)
 		{
 			m_ppaaiUnimprovedFeatureYieldChange[iFeature] = yield;
+		}
+		for(int iTerrain = 0; iTerrain < GC.getNumTerrainInfos(); iTerrain++)
+		{
+			m_ppaaiTerrainYieldChange[iTerrain] = yield;
 		}
 	}
 
@@ -2300,6 +2353,20 @@ int CvPlayerTraits::GetUnimprovedFeatureYieldChange(FeatureTypes eFeature, Yield
 	}
 
 	return m_ppaaiUnimprovedFeatureYieldChange[(int)eFeature][(int)eYield];
+}
+
+/// Extra yield from a terrain type (e.g. Viking Fury: snow/tundra bonuses)
+int CvPlayerTraits::GetTerrainYieldChange(TerrainTypes eTerrain, YieldTypes eYield) const
+{
+	CvAssertMsg(eTerrain < GC.getNumTerrainInfos(), "Invalid eTerrain parameter in call to CvPlayerTraits::GetTerrainYieldChange()");
+	CvAssertMsg(eYield < NUM_YIELD_TYPES,           "Invalid eYield parameter in call to CvPlayerTraits::GetTerrainYieldChange()");
+
+	if(eTerrain == NO_TERRAIN)
+	{
+		return 0;
+	}
+
+	return m_ppaaiTerrainYieldChange[(int)eTerrain][(int)eYield];
 }
 
 /// Do all new units get a specific promotion?
@@ -3403,6 +3470,20 @@ void CvPlayerTraits::Read(FDataStream& kStream)
 	kStream >> m_ppaaiImprovementYieldChange;
 	kStream >> m_ppaaiSpecialistYieldChange;
 	kStream >> m_ppaaiUnimprovedFeatureYieldChange;
+#ifdef SAVE_BACKWARDS_COMPATIBILITY
+	if (uiVersion >= 1006)
+	{
+#endif
+		kStream >> m_ppaaiTerrainYieldChange;
+#ifdef SAVE_BACKWARDS_COMPATIBILITY
+	}
+	else
+	{
+		Firaxis::Array<int, NUM_YIELD_TYPES> zeroYield;
+		for (unsigned int j = 0; j < NUM_YIELD_TYPES; ++j) zeroYield[j] = 0;
+		m_ppaaiTerrainYieldChange.assign(GC.getNumTerrainInfos(), zeroYield);
+	}
+#endif
 
 	if (uiVersion >= 11)
 	{
@@ -3526,7 +3607,7 @@ void CvPlayerTraits::Read(FDataStream& kStream)
 void CvPlayerTraits::Write(FDataStream& kStream)
 {
 	// Current version number
-	uint uiVersion = 21;
+	uint uiVersion = 22;
 #ifdef SAVE_BACKWARDS_COMPATIBILITY
 	uiVersion = BUMP_SAVE_VERSION_TRAITS;
 #endif
@@ -3680,6 +3761,7 @@ void CvPlayerTraits::Write(FDataStream& kStream)
 	kStream << m_ppaaiImprovementYieldChange;
 	kStream << m_ppaaiSpecialistYieldChange;
 	kStream << m_ppaaiUnimprovedFeatureYieldChange;
+	kStream << m_ppaaiTerrainYieldChange;
 
 	kStream << (int)m_aUniqueLuxuryAreas.size();
 	for (unsigned int iI = 0; iI < m_aUniqueLuxuryAreas.size(); iI++)

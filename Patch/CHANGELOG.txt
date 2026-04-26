@@ -8,14 +8,16 @@
 **China - Growth & Farms**
 - Art of War trait gives +15% city growth.
 - Every Farm improvement provides +1 Food.
-- Granary, Aqueduct and Hospital each provide +1 Food.
+- All food buildings (Granary, Watermill, Aqueduct, Hospital, Lighthouse, Barn) each provide +1 Food.
 
 **Assyria - Combat on Enemy Soil**
 - Slayer of Tiamat grants +15% Combat Strength when fighting on tiles owned by a major-civ enemy (not city-states or barbarians).
 - Royal Library now also provides +1 Culture.
 
-**Denmark - Naval Through Ice**
+**Denmark - Terrain Yields & Naval Ice**
 - Viking Fury now allows naval units to enter impassable ice tiles.
+- Snow tiles now yield +1 Food, +1 Production, and +1 Faith for Danish cities.
+- Tundra tiles now yield +1 Production for Danish cities.
 
 **Byzantium - Faith Rework**
 - Patriarch of Constantinople grants +1 Faith per Great Work specialist (Writer, Artist, Musician, Scientist, Merchant, Engineer).
